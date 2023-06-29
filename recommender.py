@@ -62,7 +62,7 @@ merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
 merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
 merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
 
-sample = merged_data[:10000]
+sample = merged_data[:1000]
 
 count = CountVectorizer(stop_words = 'english')
 count_matrix = count.fit_transform(sample['content'])
@@ -100,10 +100,10 @@ def top_x_genre_movie(data, genre='Drama', m=m, val=100):
     return top_x
 
 # @st.cache_data
-# # Fucntion to return recommended movie based on content
-# def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
-#     movie_index = indices[movie_title]
-#     pairwise_similarity_score = sorted(list(enumerate(cosine_sim[movie_index])), key=lambda x: x[1], reverse=True)
+# Fucntion to return recommended movie based on content
+def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
+    movie_index = indices[movie_title]
+    pairwise_similarity_score = sorted(list(enumerate(cosine_sim[movie_index])), key=lambda x: x[1], reverse=True)
 #     top_similar_movie = pairwise_similarity_score[1:top_x]
 #     recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
 #     return recom_movie.iloc[:, 4:10]
