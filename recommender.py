@@ -79,6 +79,6 @@ hide = """
   """
 
 with st.expander('Overall Top Movies', True):
-    num = st.number_input('Enter Top Number')
+    num = st.number_input('Enter Top Number', value=0, step=1)
     top = top_x_movie(movie_md, val=num)
     st.write(top)
