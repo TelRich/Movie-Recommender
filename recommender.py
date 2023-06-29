@@ -143,7 +143,8 @@ with st.expander('Top Movies Based on Title', True):
     sample_title = sample.title.unique()[:20]
     text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
     st.markdown(text)
-    mov_title = st.text_input('Enter a genre')
+    st.subheader('Select one out of the above title')
+    mov_title = st.text_input('Enter a title')
     num3 = st.number_input('Enter a number', value=0, step=1) 
     movie = recommended_movie(mov_title, num3)
     movie.index = movie.index + 1
