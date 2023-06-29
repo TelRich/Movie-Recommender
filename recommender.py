@@ -112,6 +112,7 @@ def recommended_movie(top_xxx=10, movie_title='Toy Story', cosine_sim=cosine_sim
     recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
     return recom_movie.iloc[:, 4:10]
 
+
 # Hide index numbers
 hide = """
   <style>
