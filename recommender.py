@@ -23,7 +23,7 @@ based on their preferences and viewing history. It utilizes data analysis and ma
 to make personalized movie recommendations.
   </center>""", unsafe_allow_html=True)
 
-@st.cache_resource
+@st.cache_data
 def load_data():
     data1 = pd.read_csv('dataset/movies_metadata.csv', low_memory=False)
     data2 = pd.read_csv('dataset/credits.csv')
