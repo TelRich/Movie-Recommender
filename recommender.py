@@ -149,5 +149,8 @@ with st.expander('Top Movies Based on Title', True):
     st.subheader('Select one out of the above title')
     mov_title = st.text_input('Enter a title')
     num3 = st.number_input('Enter a value', value=0, step=1) 
-    movie = recommended_movie(top_xxx=num3, movie_title=mov_title)
-    st.write(movie)
+    if mov_title:
+        movie = recommended_movie(top_xxx=num3, movie_title=mov_title)
+        st.write(movie)
+    else:
+        st.text('Input a movie title')
