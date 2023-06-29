@@ -23,7 +23,7 @@ to make personalized movie recommendations.
 @st.cache_data
 def load_data():
     data1 = pd.read_csv('dataset/movies_metadata.csv', low_memory=False)
-    data2 = pd.read_csv('dataset/credits.csv')
+    # data2 = pd.read_csv('dataset/credits.csv')
     data3 = pd.read_csv('dataset/keywords.csv')
     data4 = pd.read_csv('dataset/ratings_small.csv')
     data5 = pd.read_csv('dataset/links_small.csv')
