@@ -40,11 +40,9 @@ movie_lk = load_data()[4]
 
 # Selecting columns of interest
 movie_md = movie_md[['genres', 'id', 'imdb_id', 'release_date', 'title', 'vote_average', 'vote_count', 'popularity', 'runtime']]
-movie_md['genres']
 # extracting the contents
 movie_md['genres'] = movie_md['genres'].apply(lambda x: [genre['name'] for genre in ast.literal_eval(x)])
-movie_cr['cast']
-# movie_kw['keywords'] = movie_kw['keywords'].apply(lambda x: [i['name'] for i in ast.literal_eval(x)])
+movie_kw['keywords'] = movie_kw['keywords'].apply(lambda x: [i['name'] for i in ast.literal_eval(x)])
 
 # change date data type
 movie_md['release_date'] = pd.to_datetime(movie_md['release_date'], errors='coerce')
