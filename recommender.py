@@ -91,7 +91,7 @@ st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_all
 
 with st.expander('Top Movies', True):
     st.empty()
-    num = st.number_input('Enter Top Number', value=0, step=1)
+    num = st.number_input('Enter top number', value=0, step=1)
     top = top_x_movie(movie_md, val=num)
     st.write(top)
     
@@ -99,7 +99,7 @@ st.markdown("<h1 style='text-align:center;'>Top Movies by Genres</h1>", unsafe_a
 
 with st.expander('Top Movies by Genre', True):
     st.empty()
-    num = st.number_input('Enter Top Number', value=0, step=1)
+    num = st.number_input('Enter a umber', value=0, step=1)
     gn_movie_md = movie_md.explode('genres')
     st.write(print(gn_movie_md.genres.unique()))
     typ = st.text_input('Enter a genre')
