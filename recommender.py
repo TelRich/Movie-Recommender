@@ -102,11 +102,6 @@ def top_x_genre_movie(data, genre='Drama', m=m, val=100):
 # @st.cache_data
 # Fucntion to return recommended movie based on content
 def recommended_movie(top_xxx=10, movie_title='Toy Story', cosine_sim=cosine_sim):
-    if top_xxx.isdigit():
-        top_xxx = int(top_xxx)
-    else:
-        # Handle the case when top_xxx is empty or invalid
-        top_xxx = 10 # Assign a default value or appropriate logic
     movie_index = indices[movie_title]
     pairwise_similarity_score = sorted(list(enumerate(cosine_sim[movie_index])), key=lambda x: x[1], reverse=True)
     top_similar_movie = pairwise_similarity_score[1:top_xxx]
@@ -152,6 +147,6 @@ with st.expander('Top Movies Based on Title', True):
     st.subheader('Select one out of the above title')
     mov_title = st.text_input('Enter a title')
     num3 = st.number_input('Enter a value', value=0, step=1) 
-    movie = recommended_movie(mov_title, num3)
+    movie = recommended_movie(num3, mov_title)
     movie.index = movie.index + 1
     st.write(movie)
