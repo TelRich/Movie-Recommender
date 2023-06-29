@@ -13,6 +13,11 @@ A movie recommender system is a software or algorithm that suggests movies to us
 
 `pip install -r requirements.txt`
 
+## How the app look like
+![](2023-06-29-18-35-09.png)
+![](2023-06-29-18-35-28.png)
+![](2023-06-29-18-35-47.png)
+
 ## Limitation
 Certainly! Based on the code provided for the slide, here are a few potential limitations:
 
