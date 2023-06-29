@@ -126,6 +126,7 @@ st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_all
 with st.expander('Top Movies', True):
     num1 = st.number_input('Enter top number', value=0, step=1)
     top = top_x_movie(movie_md, val=num1)
+    top.index = top.index+1
     st.write(top)
     
 st.markdown("<h1 style='text-align:center;'>Top Movies by Genres</h1>", unsafe_allow_html=True)
