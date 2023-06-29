@@ -145,7 +145,7 @@ with st.expander('Top Movies Based on Title', True):
     st.markdown(text)
     st.subheader('Select one out of the above title')
     mov_title = st.text_input('Enter a title')
-    num3 = st.number_input('Enter a number', value=0, step=1) 
+    num3 = st.number_input('Enter a value', value=0, step=1) 
     movie = recommended_movie(mov_title, num3)
     movie.index = movie.index + 1
     st.write(movie)
