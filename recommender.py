@@ -141,7 +141,7 @@ st.markdown("<h1 style='text-align:center;'>Top Movies based on Title</h1>", uns
 
 with st.expander('Top Movies Based on Title', True):
     sample_title = sample.title.unique()[:20]
-    text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
+    text = ', '.join(str(item) for item in sample_title if not pd.isnull(item))
     st.markdown(text)
     st.subheader('Select one out of the above title')
     mov_title = st.text_input('Enter a title')
