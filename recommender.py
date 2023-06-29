@@ -103,7 +103,7 @@ with st.expander('Top Movies by Genre', True):
     gn_movie_md = movie_md.explode('genres')
     uniq_genre = gn_movie_md.genres.unique()
     text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
-    st.text(text)
+    st.markdown(text)
     typ = st.text_input('Enter a genre')
     top_genre = top_x_genre_movie(gn_movie_md, genre=typ, val=10)
     st.write(top_genre)
