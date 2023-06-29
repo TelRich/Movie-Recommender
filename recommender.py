@@ -53,7 +53,7 @@ movie_md = movie_md.drop([19730, 29503, 35587])
 movie_md['id'] = movie_md['id'].astype('int')
 
 # extract release year
-movie_md['release_year'] = movie_md.loc[:,'release_date'].dt.year.fillna(0).astype('int')
+movie_md['release_year'] = movie_md['release_date'].dt.year.fillna(0).astype('int')
 
 # Merged File
 merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
