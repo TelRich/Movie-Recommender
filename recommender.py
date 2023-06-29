@@ -70,6 +70,15 @@ def top_x_movie(data, m=m, val=100):
     top_x = filterd_movie_md.sort_values('wr', ascending=False).loc[:, 'title':'wr'].head(val).reset_index(drop=True)
     return top_x
 
+@st.cache_data
+# Function to return top genre movies
+def top_x_genre_movie(data, genre='Drama', m=m, val=100):
+    data = data[data['genres'] == genre]
+    filterd_movie_md = data[data['vote_count'] >= m].copy()
+    filterd_movie_md['wr'] = filterd_movie_md.apply(WR, axis=1)
+    top_x = filterd_movie_md.sort_values('wr', ascending=False).loc[:, 'title':'wr'].head(val).reset_index(drop=True)
+    return top_x
+
 # Hide index numbers
 hide = """
   <style>
@@ -77,8 +86,22 @@ hide = """
   tbody th {display:none}
   </style>
   """
+  
+st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_allow_html=True)
 
-with st.expander('Overall Top Movies', True):
+with st.expander('', True):
+    st.empty()
     num = st.number_input('Enter Top Number', value=0, step=1)
     top = top_x_movie(movie_md, val=num)
     st.write(top)
+    
+st.markdown("<h1 style='text-align:center;'>Top Movies by Genres</h1>", unsafe_allow_html=True)
+
+with st.expander('', True):
+    st.empty()
+    num = st.number_input('Enter Top Number', value=0, step=1)
+    gn_movie_md = movie_md.explode('genres')
+    st.write(print(gn_movie_md.genres.unique()))
+    typ = st.text_input('Enter a genre')
+    top_genre = top_x_genre_movie(gn_movie_md, genre=typ, val=10)
+    st.write(top_genre)
