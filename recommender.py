@@ -119,7 +119,8 @@ hide = """
   tbody th {display:none}
   </style>
   """
-  
+st.markdown(hide, True)
+
 st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_allow_html=True)
 
 with st.expander('Top Movies', True):
