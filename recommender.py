@@ -108,9 +108,6 @@ def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
     recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
     return recom_movie.iloc[:, 4:10]
 
-d = recommended_movie('The American President', 3)
-d
-
 # Hide index numbers
 hide = """
   <style>
@@ -122,7 +119,6 @@ hide = """
 st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_allow_html=True)
 
 with st.expander('Top Movies', True):
-    st.empty()
     num1 = st.number_input('Enter top number', value=0, step=1)
     top = top_x_movie(movie_md, val=num1)
     top.index = top.index+1
@@ -131,14 +127,24 @@ with st.expander('Top Movies', True):
 st.markdown("<h1 style='text-align:center;'>Top Movies by Genres</h1>", unsafe_allow_html=True)
 
 with st.expander('Top Movies by Genre', True):
-    st.empty()
-    num2 = st.number_input('Enter a number', value=0, step=1)
     gn_movie_md = movie_md.explode('genres')
     uniq_genre = gn_movie_md.genres.unique()
     text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
     st.markdown(text)
     typ = st.text_input('Enter a genre')
+    num2 = st.number_input('Enter a number', value=0, step=1)
     top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
     top_genre.index = top.index + 1
     st.write(top_genre)
     
+st.markdown("<h1 style='text-align:center;'>Top Movies based on Title</h1>", unsafe_allow_html=True)
+
+with st.expander('Top Movies Based on Title', True):
+    sample_title = sample.title.unique()[:20]
+    text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
+    st.markdown(text)
+    mov_title = st.text_input('Enter a genre')
+    num3 = st.number_input('Enter a number', value=0, step=1) 
+    movie = recommended_movie(mov_title, num3)
+    movie.index = movie.index + 1
+    st.write(movie)
