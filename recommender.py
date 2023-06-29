@@ -141,7 +141,7 @@ with st.expander('Top Movies by Genre', True):
     num2 = st.number_input('Enter a number', value=0, step=1)
     if typ:
         top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
-        top_genre = top_genre+1
+        top_genre.index = top_genre.index+1
         st.write(top_genre)
     else:
         st.text('Input one of the genre listed above')
