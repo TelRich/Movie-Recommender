@@ -20,7 +20,7 @@ based on their preferences and viewing history. It utilizes data analysis and ma
 to make personalized movie recommendations.
   </center>""", unsafe_allow_html=True)
 
-@st.cache
+@st.cache_resource
 def load_data():
     data1 = pd.read_csv('dataset/movies_metadata.csv', low_memory=False)
     data2 = pd.read_csv('dataset/credits.csv')
@@ -54,7 +54,7 @@ movie_md['release_year'] = movie_md['release_date'].dt.year.fillna(0).astype('in
 m = movie_md['vote_count'].quantile(0.9)
 C = movie_md['vote_average'].mean()
 
-@st.cache_data
+@st.cache_resource
 # Function to calculate WR
 def WR(data, m=m, C=C):
     v = data['vote_count']
@@ -62,7 +62,7 @@ def WR(data, m=m, C=C):
     wr = ((v/(v+m)*R) + (m/(v+m)*C)).round(2)
     return wr
 
-@st.cache_data
+@st.cache_resource
 # Function to return top overall movies
 def top_x_movie(data, m=m, val=100):
     filterd_movie_md = data[data['vote_count'] >= m].copy()
