@@ -59,9 +59,10 @@ movie_md['release_year'] = movie_md['release_date'].dt.year.fillna(0).astype('in
 # Merged File
 merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
     .merge(movie_kw, on='id')
+merged_data['cast']
 
 # Create content for content based recommendation
-merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
+# merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
 # merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
 
 # sample = merged_data[:20001]
