@@ -43,8 +43,7 @@ movie_md = movie_md[['genres', 'id', 'imdb_id', 'release_date', 'title', 'vote_a
 
 # extracting the contents
 movie_md['genres'] = movie_md['genres'].apply(lambda x: [genre['name'] for genre in ast.literal_eval(x)])
-# movie_md['genres'] + movie_cr['cast']
-# type(movie_cr['cast'][0])
+movie_cr['cast']
 # movie_kw['keywords'] = movie_kw['keywords'].apply(lambda x: [i['name'] for i in ast.literal_eval(x)])
 
 # change date data type
