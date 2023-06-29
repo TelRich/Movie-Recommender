@@ -64,17 +64,20 @@ merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
 
 sample = merged_data[:1000]
 
-count = CountVectorizer(stop_words = 'english')
-count_matrix = count.fit_transform(sample['content'])
-cosine_sim = cosine_similarity(count_matrix, count_matrix)
+@st.cache_data
+def cosine_vals():
+    count = CountVectorizer(stop_words = 'english')
+    count_matrix = count.fit_transform(sample['content'])
+    cosine_si = cosine_similarity(count_matrix, count_matrix)
+    return cosine_si
 
 indices = pd.Series(sample.index, index=sample['title']).drop_duplicates()
-
+cosine_sim = cosine_vals()
 
 m = movie_md['vote_count'].quantile(0.9)
 C = movie_md['vote_average'].mean()
 
-# @st.cache_data
+@st.cache_data
 # Function to calculate WR
 def WR(data, m=m, C=C):
     v = data['vote_count']
@@ -82,7 +85,7 @@ def WR(data, m=m, C=C):
     wr = ((v/(v+m)*R) + (m/(v+m)*C)).round(2)
     return wr
 
-# @st.cache_data
+@st.cache_data
 # Function to return top overall movies
 def top_x_movie(data, m=m, val=100):
     filterd_movie_md = data[data['vote_count'] >= m].copy()
@@ -90,7 +93,7 @@ def top_x_movie(data, m=m, val=100):
     top_x = filterd_movie_md.sort_values('wr', ascending=False).loc[:, 'title':'wr'].head(val).reset_index(drop=True)
     return top_x
 
-# @st.cache_data
+@st.cache_data
 # Function to return top genre movies
 def top_x_genre_movie(data, genre='Drama', m=m, val=100):
     data = data[data['genres'] == genre]
@@ -99,7 +102,7 @@ def top_x_genre_movie(data, genre='Drama', m=m, val=100):
     top_xx= filterd_movie_md.sort_values('wr', ascending=False).loc[:, 'title':'wr'].head(val).reset_index(drop=True)
     return top_xx
 
-# @st.cache_data
+@st.cache_data
 # Fucntion to return recommended movie based on content
 def recommended_movie(top_xxx=10, movie_title='Toy Story', cosine_sim=cosine_sim):
     movie_index = indices[movie_title]
