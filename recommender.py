@@ -57,19 +57,18 @@ movie_md['release_year'] = movie_md['release_date'].dt.year.fillna(0).astype('in
 # Merged File
 merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
     .merge(movie_kw, on='id')
-merged_data['cast']
 
 # Create content for content based recommendation
-# merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
-# merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
+merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
+merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
 
-# sample = merged_data[:20001]
+sample = merged_data[:]
 
-# count = CountVectorizer(stop_words = 'english')
-# count_matrix = count.fit_transform(sample['content'])
-# cosine_sim = cosine_similarity(count_matrix, count_matrix)
+count = CountVectorizer(stop_words = 'english')
+count_matrix = count.fit_transform(sample['content'])
+cosine_sim = cosine_similarity(count_matrix, count_matrix)
 
-# indices = pd.Series(sample.index, index=sample['title']).drop_duplicates()
+indices = pd.Series(sample.index, index=sample['title']).drop_duplicates()
 
 
 m = movie_md['vote_count'].quantile(0.9)
