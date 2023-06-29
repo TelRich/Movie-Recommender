@@ -100,15 +100,17 @@ def top_x_genre_movie(data, genre='Drama', m=m, val=100):
     top_x = filterd_movie_md.sort_values('wr', ascending=False).loc[:, 'title':'wr'].head(val).reset_index(drop=True)
     return top_x
 
-# @st.cache_data
-# # Fucntion to return recommended movie based on content
-# def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
-#     movie_index = indices[movie_title]
-#     pairwise_similarity_score = sorted(list(enumerate(cosine_sim[movie_index])), key=lambda x: x[1], reverse=True)
-#     top_similar_movie = pairwise_similarity_score[1:top_x]
-#     recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
-#     return recom_movie.iloc[:, 4:10]
+@st.cache_data
+# Fucntion to return recommended movie based on content
+def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
+    movie_index = indices[movie_title]
+    pairwise_similarity_score = sorted(list(enumerate(cosine_sim[movie_index])), key=lambda x: x[1], reverse=True)
+    top_similar_movie = pairwise_similarity_score[1:top_x]
+    recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
+    return recom_movie.iloc[:, 4:10]
 
+d = recommended_movie('The Matrix', 3)
+d
 
 # Hide index numbers
 hide = """
@@ -140,3 +142,4 @@ with st.expander('Top Movies by Genre', True):
     top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
     top_genre.index = top.index + 1
     st.write(top_genre)
+    
