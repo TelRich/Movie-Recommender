@@ -61,6 +61,7 @@ merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
 # Create content for content based recommendation
 merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
 merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
+merged_data = merged_data.dropna(subset='title')
 
 sample = merged_data[:1000]
 
