@@ -40,7 +40,7 @@ movie_lk = load_data()[4]
 
 # Selecting columns of interest
 movie_md = movie_md[['genres', 'id', 'imdb_id', 'release_date', 'title', 'vote_average', 'vote_count', 'popularity', 'runtime']]
-
+movie_md['genres']
 # extracting the contents
 movie_md['genres'] = movie_md['genres'].apply(lambda x: [genre['name'] for genre in ast.literal_eval(x)])
 movie_cr['cast']
