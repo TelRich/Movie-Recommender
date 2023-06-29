@@ -54,7 +54,7 @@ movie_md['release_year'] = movie_md['release_date'].dt.year.fillna(0).astype('in
 m = movie_md['vote_count'].quantile(0.9)
 C = movie_md['vote_average'].mean()
 
-@st.cache_resource
+@st.cache_data
 # Function to calculate WR
 def WR(data, m=m, C=C):
     v = data['vote_count']
@@ -62,7 +62,7 @@ def WR(data, m=m, C=C):
     wr = ((v/(v+m)*R) + (m/(v+m)*C)).round(2)
     return wr
 
-@st.cache_resource
+@st.cache_data
 # Function to return top overall movies
 def top_x_movie(data, m=m, val=100):
     filterd_movie_md = data[data['vote_count'] >= m].copy()
@@ -91,19 +91,21 @@ st.markdown("<h1 style='text-align:center;'>Overall Top Movies</h1>", unsafe_all
 
 with st.expander('Top Movies', True):
     st.empty()
-    num = st.number_input('Enter top number', value=0, step=1)
-    top = top_x_movie(movie_md, val=num)
+    num1 = st.number_input('Enter top number', value=0, step=1)
+    top = top_x_movie(movie_md, val=num1)
+    top.index = top.index+1
     st.write(top)
     
 st.markdown("<h1 style='text-align:center;'>Top Movies by Genres</h1>", unsafe_allow_html=True)
 
 with st.expander('Top Movies by Genre', True):
     st.empty()
-    num = st.number_input('Enter a umber', value=0, step=1)
+    num2 = st.number_input('Enter a number', value=0, step=1)
     gn_movie_md = movie_md.explode('genres')
     uniq_genre = gn_movie_md.genres.unique()
     text = ', '.join(str(item) for item in uniq_genre if not pd.isnull(item))
     st.markdown(text)
     typ = st.text_input('Enter a genre')
-    top_genre = top_x_genre_movie(gn_movie_md, genre=typ, val=10)
+    top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
+    top_genre.index = top.index + 1
     st.write(top_genre)
