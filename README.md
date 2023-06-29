@@ -13,3 +13,5 @@ A movie recommender system is a software or algorithm that suggests movies to us
 
 `pip install -r requirements.txt`
 
+## Limitation
+- Due to the low memory space for free version of streamlit, the data was chunk to 1000. This means the recommender system is limited to the number of movies it can return.
