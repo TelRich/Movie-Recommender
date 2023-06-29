@@ -62,7 +62,7 @@ merged_data = movie_md.merge(movie_cr.loc[:,['cast', 'id']], on='id')\
 merged_data['content'] = merged_data['genres'] + merged_data['cast'] + merged_data['keywords']
 merged_data['content'] = merged_data['content'].apply(lambda x: ' '.join(x))
 
-sample = merged_data[:]
+sample = merged_data[:10000]
 
 count = CountVectorizer(stop_words = 'english')
 count_matrix = count.fit_transform(sample['content'])
