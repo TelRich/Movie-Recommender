@@ -139,8 +139,11 @@ with st.expander('Top Movies by Genre', True):
     st.subheader('Select one of the genre listed above')
     typ = st.text_input('Enter a genre')
     num2 = st.number_input('Enter a number', value=0, step=1)
-    top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
-    st.write(top_genre)
+    if typ:
+        top_genre = top_x_genre_movie(gn_movie_md, genre=typ.capitalize(), val=num2)
+        st.write(top_genre)
+    else:
+        st.text('Input one of the genre listed above')
     
 st.markdown("<h1 style='text-align:center;'>Top Movies based on Title</h1>", unsafe_allow_html=True)
 
