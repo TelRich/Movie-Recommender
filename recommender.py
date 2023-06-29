@@ -108,7 +108,7 @@ def recommended_movie(movie_title, top_x, cosine_sim=cosine_sim):
     recom_movie = merged_data.iloc[[x[0] for x in top_similar_movie]].reset_index(drop=True)
     return recom_movie.iloc[:, 4:10]
 
-d = recommended_movie('The Matrix', 3)
+d = recommended_movie('The American President', 3)
 d
 
 # Hide index numbers
